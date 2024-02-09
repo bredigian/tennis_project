@@ -1,0 +1,38 @@
+[
+  {
+    "id": "id-1",
+    "title": "Raqueta HEAD",
+    "description": "Sumérgete en la excelencia del juego con la raqueta de tenis HEAD. Diseñada con la combinación perfecta de tecnología innovadora y estilo dinámico, esta raqueta ofrece un equilibrio excepcional entre potencia y control. Su estructura ligera pero resistente proporciona una maniobrabilidad superior en la cancha, mientras que la tecnología de cuerdas avanzada maximiza la precisión en cada golpe. Con HEAD, cada partido se convierte en una experiencia única donde la calidad y el rendimiento se fusionan en una simbiosis perfecta.",
+    "price": 300,
+    "stock": 10,
+    "image": "https://www.hectortenis.com/wp-content/uploads/2022/06/boom.jpg",
+    "type": "raqueta"
+  },
+  {
+    "id": "id-2",
+    "title": "Raqueta Wilson",
+    "description": "Eleva tu juego a nuevas alturas con la raqueta de tenis Wilson, una obra maestra de ingeniería y diseño deportivo. Creada para jugadores exigentes que buscan un rendimiento óptimo, esta raqueta ofrece una combinación perfecta de potencia y versatilidad. La tecnología de marco avanzada proporciona una estabilidad excepcional, permitiendo golpes precisos y potentes. Con un diseño aerodinámico y ergonómico, la raqueta Wilson es la elección ideal para aquellos que buscan destacar en la cancha con estilo y eficiencia.",
+    "price": 280,
+    "stock": 5,
+    "image": "https://www.hectortenis.com/wp-content/uploads/2022/03/clash.png",
+    "type": "raqueta"
+  },
+  {
+    "id": "id-3",
+    "title": "Pelotas Penn",
+    "description": "El compañero esencial para cualquier sesión de tenis, el tubo de pelotas de tenis Penn es sinónimo de calidad y durabilidad. Este contenedor resistente alberga pelotas que garantizan un rendimiento constante en la cancha, ya sea en entrenamientos intensivos o partidos emocionantes. Diseñado para mantener la presión y rebote ideales, el tubo Penn asegura una experiencia de juego consistente. Empaca tu energía y prepárate para una jornada de tenis inigualable con el confiable tubo de pelotas Penn.",
+    "price": 25,
+    "stock": 30,
+    "image": "https://http2.mlstatic.com/D_NQ_NP_918789-MLA54286997261_032023-O.webp",
+    "type": "pelota"
+  },
+  {
+    "id": "id-4",
+    "title": "Zapatillas Adidas",
+    "description": "Atrévete a destacar en la cancha con las zapatillas de tenis Adidas, un símbolo de estilo y rendimiento deportivo. Estas zapatillas fusionan la moda contemporánea con la última tecnología en calzado deportivo, ofreciendo comodidad y soporte sin comprometer el estilo. La suela exterior de alto agarre proporciona una tracción excepcional, mientras que la amortiguación avanzada absorbe el impacto en cada movimiento. Ya sea en arcilla, césped o pista dura, las zapatillas de tenis Adidas te llevarán a la victoria con un diseño vanguardista que impacta a nivel mundial.",
+    "price": 75,
+    "stock": 20,
+    "image": "https://www.clicksport.com.ar/6226-thickbox_default/zapatillas-adidas-courtjam-bounce-tenis-hombre.jpg",
+    "type": "calzado"
+  }
+]
