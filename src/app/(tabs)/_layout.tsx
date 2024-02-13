@@ -1,5 +1,5 @@
 import { AntDesign, Ionicons } from "@expo/vector-icons"
-import { Image, Text, View } from "react-native"
+import { Image, View } from "react-native"
 
 import { COLORS } from "../../themes/colors"
 import React from "react"
@@ -37,7 +37,7 @@ const AppLayout = () => {
                   style={{
                     height: 75,
                     width: 75,
-                    marginTop: 36,
+                    marginTop: 40,
                     marginBottom: 10,
                     alignSelf: "center",
                   }}
