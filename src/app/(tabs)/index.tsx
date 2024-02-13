@@ -26,7 +26,9 @@ const Home = () => {
   return (
     <View className="flex-1 justify-start items-start px-4">
       {error ? (
-        <Text>Ocurrió un error al obtener los productos</Text>
+        <Text className="text-xl text-primary-normal font-medium text-center mt-4">
+          Ocurrió un error al obtener los productos
+        </Text>
       ) : products.length > 0 ? (
         <FlatList
           data={products}
