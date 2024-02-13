@@ -37,7 +37,8 @@ const AppLayout = () => {
                   style={{
                     height: 75,
                     width: 75,
-                    marginVertical: 10,
+                    marginTop: 36,
+                    marginBottom: 10,
                     alignSelf: "center",
                   }}
                   resizeMode="contain"

@@ -1,4 +1,4 @@
-import PRODUCTS from "../db/products.json"
+import { API_URL } from "../config/api"
 import { Product } from "../types/product.types"
 import { create } from "zustand"
 
@@ -7,8 +7,10 @@ export const useProductsStore = create((set: any, get: any) => ({
   detail: null as Product | null,
 
   getProducts: async () => {
-    const products = PRODUCTS as Product[]
-
+    const response = await fetch(`${API_URL}/products`, {
+      method: "GET",
+    })
+    const products = await response.json()
     set({ products })
   },
 

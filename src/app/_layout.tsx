@@ -11,7 +11,9 @@ const Layout = () => {
       <Stack.Screen
         name="[id]/index"
         options={{
-          title: "Product",
+          headerShown: true,
+          headerTitleAlign: "center",
+          title: "",
         }}
       />
     </Stack>
