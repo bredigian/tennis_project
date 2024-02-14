@@ -1,7 +1,5 @@
-import { Text, TouchableOpacity } from "react-native"
-
-import { MaterialCommunityIcons } from "@expo/vector-icons"
-import React from "react"
+import { Pressable, Text } from "react-native"
+import React, { ReactNode } from "react"
 
 type WidthType =
   | "w-full"
@@ -17,21 +15,34 @@ const Button = ({
   children,
   width,
   icon,
+  variant,
+  onPress,
 }: {
   children: string
   width?: WidthType
-  icon?: boolean
+  icon?: ReactNode
+  variant?: "sm" | "lg" | "xl"
+  onPress: () => void
 }) => {
   return (
-    <TouchableOpacity
-      className={`flex flex-row items-center justify-center bg-primary-normal px-4 py-2 ${width}`}
+    <Pressable
+      onPress={onPress}
+      className={`flex flex-row items-center justify-center bg-primary-normal px-4 py-2 rounded-xl ${width}`}
       style={{ gap: 16 }}
     >
-      <Text className="text-3xl text-white font-bold">{children}</Text>
-      {icon && (
-        <MaterialCommunityIcons name="shopping" size={32} color={"white"} />
-      )}
-    </TouchableOpacity>
+      <Text
+        className={`${
+          variant === "sm"
+            ? "text-sm"
+            : variant === "lg"
+            ? "text-lg"
+            : "text-3xl"
+        } text-white font-bold`}
+      >
+        {children}
+      </Text>
+      {icon}
+    </Pressable>
   )
 }
 
