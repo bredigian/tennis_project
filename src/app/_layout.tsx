@@ -9,11 +9,12 @@ const Layout = () => {
   const { replace } = useRouter()
 
   useEffect(() => {
-    console.log(user)
     const inProtectedStack = segmentes[0] === "(protected)"
 
     if (user && !inProtectedStack) {
       replace("/(protected)")
+    } else if (!user) {
+      replace("/(auth)")
     }
   }, [user])
 
