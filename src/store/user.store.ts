@@ -28,8 +28,7 @@ export const useUserStore = create((set: any) => ({
       body: JSON.stringify(user),
     })
     const data: ErrorResponse | User = await response.json()
-    if ("statusCode" in data)
-      if (data.statusCode === 400) throw new Error(data.message)
+    if ("statusCode" in data) throw new Error(data.message)
 
     set({ user: data })
   },
