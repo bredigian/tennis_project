@@ -1,7 +1,7 @@
 import { Control, UseFormRegister, useController } from "react-hook-form"
 import { KeyboardType, Text, TextInput, View } from "react-native"
 
-import { AuthForm } from "../types/auth.types"
+import { AuthForm } from "@/types/auth.types"
 
 const Input = ({
   placeholder,

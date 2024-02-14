@@ -1,7 +1,7 @@
 import { Image, Text, View } from "react-native"
 
 import { Link } from "expo-router"
-import SignInForm from "../../components/SignInForm"
+import SignInForm from "@/components/SignInForm"
 
 const SignIn = () => {
   return (

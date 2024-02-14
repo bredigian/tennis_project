@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native"
 
 import { AntDesign } from "@expo/vector-icons"
-import { COLORS } from "../themes/colors"
+import { COLORS } from "@/themes/colors"
 
 const QuantitySelector = ({
   stock,

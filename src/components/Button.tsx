@@ -27,7 +27,7 @@ const Button = ({
   return (
     <Pressable
       onPress={onPress}
-      className={`flex flex-row items-center justify-center bg-primary-normal px-4 py-2 rounded-xl ${width}`}
+      className={`flex flex-row items-center justify-center bg-primary-normal h-14 rounded-xl ${width}`}
       style={{ gap: 16 }}
     >
       <Text

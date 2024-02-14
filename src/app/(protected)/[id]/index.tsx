@@ -1,13 +1,13 @@
-import { Image, ScrollView, StatusBar, Text, View } from "react-native"
+import { Image, Text, View } from "react-native"
 import { useEffect, useState } from "react"
 
-import Button from "../../components/Button"
-import QuantitySelector from "../../components/QuantitySelector"
+import Button from "@/components/Button"
+import QuantitySelector from "@/components/QuantitySelector"
 import { SafeAreaView } from "react-native-safe-area-context"
-import Subtitle from "../../components/Subtitle"
-import Title from "../../components/Title"
+import Subtitle from "@/components/Subtitle"
+import Title from "@/components/Title"
 import { useLocalSearchParams } from "expo-router"
-import { useProductsStore } from "../../store/products.store"
+import { useProductsStore } from "@/store/products.store"
 
 const ProductDetail = () => {
   const { id } = useLocalSearchParams<{ id: string }>()

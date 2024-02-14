@@ -1,6 +1,6 @@
 import { Stack } from "expo-router"
 
-const AppLayout = () => {
+const ProtectedLayout = () => {
   return (
     <Stack
       screenOptions={{
@@ -20,4 +20,4 @@ const AppLayout = () => {
   )
 }
 
-export default AppLayout
+export default ProtectedLayout

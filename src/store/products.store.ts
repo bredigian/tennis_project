@@ -1,5 +1,5 @@
-import { API_URL } from "../config/api"
-import { Product } from "../types/product.types"
+import { API_URL } from "@/config/api"
+import { Product } from "@/types/product.types"
 import { create } from "zustand"
 
 export const useProductsStore = create((set: any, get: any) => ({

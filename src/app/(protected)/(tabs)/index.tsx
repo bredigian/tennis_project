@@ -1,10 +1,10 @@
 import { ActivityIndicator, Button, FlatList, Text, View } from "react-native"
 import React, { useEffect, useLayoutEffect, useState } from "react"
 
-import { type Product as ProductT } from "../../types/product.types"
-import { useProductsStore } from "../../store/products.store"
-import Product from "../../components/Product"
-import { COLORS } from "../../themes/colors"
+import { type Product as ProductT } from "@/types/product.types"
+import { useProductsStore } from "@/store/products.store"
+import Product from "@/components/Product"
+import { COLORS } from "@/themes/colors"
 
 const Home = () => {
   const { products, getProducts } = useProductsStore()

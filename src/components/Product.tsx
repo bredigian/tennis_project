@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native"
-import { type Product as ProductT } from "../types/product.types"
+import { type Product as ProductT } from "@/types/product.types"
 import { useRouter } from "expo-router"
 
 const Product = ({ item }: { item: ProductT }) => {

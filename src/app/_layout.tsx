@@ -1,13 +1,23 @@
-import AppLayout from "../layouts/AppLayout"
-import AuthLayout from "../layouts/AuthLayout"
-import { Stack } from "expo-router"
-import { useUserStore } from "../store/user.store"
+import { Slot, useRouter, useSegments } from "expo-router"
+
+import { useEffect } from "react"
+import { useUserStore } from "@/store/user.store"
 
 const Layout = () => {
   const { user } = useUserStore()
+  const segmentes = useSegments()
+  const { replace } = useRouter()
 
-  if (!user) return <AuthLayout />
-  else return <AppLayout />
+  useEffect(() => {
+    console.log(user)
+    const inProtectedStack = segmentes[0] === "(protected)"
+
+    if (user && !inProtectedStack) {
+      replace("/(protected)")
+    }
+  }, [user])
+
+  return <Slot />
 }
 
 export default Layout

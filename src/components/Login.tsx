@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native"
 
-import { COLORS } from "../themes/colors"
+import { COLORS } from "@/themes/colors"
 
 const Login = () => {
   return (

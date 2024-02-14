@@ -1,9 +1,10 @@
-import { ActivityIndicator, View } from "react-native"
+import { ActivityIndicator, Alert, View } from "react-native"
 
-import { AuthForm as AuthFormT } from "../types/auth.types"
+import { AuthForm as AuthFormT } from "@/types/auth.types"
 import Button from "./Button"
 import Input from "./Input"
 import { useForm } from "react-hook-form"
+import { useUserStore } from "@/store/user.store"
 
 const AuthForm = () => {
   const {
@@ -12,16 +13,15 @@ const AuthForm = () => {
     formState: { isSubmitting },
   } = useForm<AuthFormT>()
 
+  const { signin } = useUserStore()
+
   const onSubmit = async (data: AuthFormT) => {
-    await new Promise(() => {
-      setTimeout(() => {
-        console.log(data)
-      }, 4000)
-    }).then(() => {
-      console.log("Terminó el timeout")
-    })
+    try {
+      await signin(data)
+    } catch (error: any) {
+      Alert.alert("¡Ocurrió un error!", error.message as string)
+    }
   }
-  console.log("isSubmitting", isSubmitting)
 
   return (
     <View className="flex w-full px-16" style={{ gap: 32 }}>

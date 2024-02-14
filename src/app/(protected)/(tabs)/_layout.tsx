@@ -1,7 +1,7 @@
 import { AntDesign, Ionicons } from "@expo/vector-icons"
 import { Image, View } from "react-native"
 
-import { COLORS } from "../../themes/colors"
+import { COLORS } from "@/themes/colors"
 import React from "react"
 import { Tabs } from "expo-router"
 
@@ -33,7 +33,7 @@ const AppLayout = () => {
             return (
               <View className="bg-white">
                 <Image
-                  source={require("../../assets/logo.png")}
+                  source={require("@/assets/logo.png")}
                   style={{
                     height: 75,
                     width: 75,

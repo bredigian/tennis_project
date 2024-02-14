@@ -1,6 +1,6 @@
 import { Image, Text, View } from "react-native"
 
-import SignUpForm from "../../../components/SignUpForm"
+import SignUpForm from "@/components/SignUpForm"
 
 const SignUp = () => {
   return (
