@@ -9,9 +9,25 @@ const AppLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
         tabBarActiveTintColor: COLORS.PRIMARY,
         tabBarInactiveTintColor: COLORS.INACTIVE,
+        header: () => {
+          return (
+            <View className="bg-white">
+              <Image
+                source={require("@/assets/logo.png")}
+                style={{
+                  height: 75,
+                  width: 75,
+                  marginTop: 40,
+                  marginBottom: 10,
+                  alignSelf: "center",
+                }}
+                resizeMode="contain"
+              />
+            </View>
+          )
+        },
         tabBarStyle: {
           height: 60,
         },
@@ -28,24 +44,6 @@ const AppLayout = () => {
         name="index"
         options={{
           title: "Inicio",
-          headerShown: true,
-          header: () => {
-            return (
-              <View className="bg-white">
-                <Image
-                  source={require("@/assets/logo.png")}
-                  style={{
-                    height: 75,
-                    width: 75,
-                    marginTop: 40,
-                    marginBottom: 10,
-                    alignSelf: "center",
-                  }}
-                  resizeMode="contain"
-                />
-              </View>
-            )
-          },
           tabBarIcon: ({ focused }) => {
             return (
               <AntDesign
@@ -65,6 +63,21 @@ const AppLayout = () => {
             return (
               <Ionicons
                 name={"tennisball-outline"}
+                size={26}
+                color={focused ? COLORS.PRIMARY : COLORS.INACTIVE}
+              />
+            )
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="profile/index"
+        options={{
+          title: "Perfil",
+          tabBarIcon: ({ focused }) => {
+            return (
+              <Ionicons
+                name="person-outline"
                 size={26}
                 color={focused ? COLORS.PRIMARY : COLORS.INACTIVE}
               />

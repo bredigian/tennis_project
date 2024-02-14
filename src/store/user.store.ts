@@ -33,4 +33,8 @@ export const useUserStore = create((set: any) => ({
 
     set({ user: data })
   },
+
+  signout: async () => {
+    set({ user: null })
+  },
 }))
