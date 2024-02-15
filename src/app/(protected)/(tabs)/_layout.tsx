@@ -13,7 +13,7 @@ const AppLayout = () => {
         tabBarInactiveTintColor: COLORS.INACTIVE,
         header: () => {
           return (
-            <View className="bg-white">
+            <View className="bg-white rounded-b-3xl">
               <Image
                 source={require("@/assets/logo.png")}
                 style={{
@@ -30,6 +30,8 @@ const AppLayout = () => {
         },
         tabBarStyle: {
           height: 60,
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
         },
         tabBarItemStyle: {
           paddingVertical: 5,

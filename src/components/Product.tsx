@@ -16,7 +16,7 @@ const Product = ({ item }: { item: ProductT }) => {
           params: item.id as any,
         })
       }
-      className="flex flex-row items-center w-full bg-white my-4 p-4"
+      className="flex flex-row items-center w-full bg-white my-4 p-4 rounded-xl"
     >
       <Image
         source={{
@@ -28,7 +28,7 @@ const Product = ({ item }: { item: ProductT }) => {
       <View className="flex-1 flex-col items-start gap-4">
         <Text className="text-xl">{item?.title}</Text>
         <Text>{parsedDescription}</Text>
-        <Text className="bg-primary-dark text-white py-1 px-2">
+        <Text className="bg-primary-dark text-white py-1 px-2 rounded-lg">
           US$ {item?.price}
         </Text>
       </View>

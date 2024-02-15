@@ -18,7 +18,7 @@ const QuantitySelector = ({
     <View className="flex flex-row items-center gap-4">
       {quantity > 1 ? (
         <TouchableOpacity onPress={minus}>
-          <AntDesign name="minuscircleo" size={28} color={COLORS.PRIMARY} />
+          <AntDesign name="minussquareo" size={28} color={COLORS.PRIMARY} />
         </TouchableOpacity>
       ) : (
         <View className="w-[28px]" />
@@ -28,7 +28,7 @@ const QuantitySelector = ({
       </Text>
       {quantity !== stock ? (
         <TouchableOpacity onPress={plus}>
-          <AntDesign name="pluscircleo" size={28} color={COLORS.PRIMARY} />
+          <AntDesign name="plussquareo" size={28} color={COLORS.PRIMARY} />
         </TouchableOpacity>
       ) : (
         <View className="w-[28px]" />

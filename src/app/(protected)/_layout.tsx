@@ -5,6 +5,10 @@ const ProtectedLayout = () => {
     <Stack
       screenOptions={{
         headerShown: false,
+        contentStyle: {
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
+        },
       }}
     >
       <Stack.Screen name="(tabs)" />

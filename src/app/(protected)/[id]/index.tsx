@@ -2,6 +2,7 @@ import { Image, Text, View } from "react-native"
 import { useEffect, useState } from "react"
 
 import Button from "@/components/Button"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 import QuantitySelector from "@/components/QuantitySelector"
 import { SafeAreaView } from "react-native-safe-area-context"
 import Subtitle from "@/components/Subtitle"
@@ -48,10 +49,12 @@ const ProductDetail = () => {
         resizeMode="contain"
       />
       <View className="flex flex-row items-center justify-between w-full">
-        <Title variant="transparent">{detail?.title as string}</Title>
+        <Title maxWidth={200} variant="transparent">
+          {detail?.title as string}
+        </Title>
         <Title variant="dark">{`US$ ${detail?.price}`}</Title>
       </View>
-      <Subtitle>{detail?.description as string}</Subtitle>
+      <Subtitle maxHeight={200}>{detail?.description as string}</Subtitle>
       <View className="flex flex-row items-center justify-between w-full">
         <Text className="text-sm font-semibold text-primary-dark">
           Stock disponible
@@ -63,7 +66,18 @@ const ProductDetail = () => {
           minus={minus}
         />
       </View>
-      <Button width="w-full" icon>
+      <Button
+        width="w-full"
+        onPress={() => console.log("Comprando " + detail?.title)}
+        backgroundColor="bg-primary-normal"
+        icon={
+          <MaterialCommunityIcons
+            name="shopping-outline"
+            color={"white"}
+            size={30}
+          />
+        }
+      >
         Comprar
       </Button>
     </SafeAreaView>

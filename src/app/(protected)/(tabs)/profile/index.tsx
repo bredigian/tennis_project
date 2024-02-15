@@ -46,7 +46,7 @@ const Profile = () => {
         style={{ margin: 0, justifyContent: "flex-end" }}
       >
         <View
-          className="flex flex-col items-center bg-white p-6"
+          className="flex flex-col items-center bg-white p-6 rounded-t-3xl"
           style={{ gap: 12 }}
         >
           <Text className="text-2xl text-center text-primary-dark font-bold">
