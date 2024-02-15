@@ -4,8 +4,14 @@ import { ErrorResponse } from "@/types/response.types"
 import { User } from "@/types/user.types"
 import { create } from "zustand"
 
+interface DoneResponse {
+  user: User
+  token: string
+}
+
 export const useUserStore = create((set: any) => ({
   user: null as User | null,
+  token: null as string | null,
 
   signup: async (user: AuthForm) => {
     const response = await fetch(`${API_URL}/auth/signup`, {
@@ -15,8 +21,10 @@ export const useUserStore = create((set: any) => ({
       },
       body: JSON.stringify(user),
     })
-    const data: User = await response.json()
-    set({ user: data })
+    const data: ErrorResponse | DoneResponse = await response.json()
+    if ("statusCode" in data) throw new Error(data.message)
+
+    set({ user: data.user, token: data.token })
   },
 
   signin: async (user: AuthForm) => {
@@ -27,10 +35,10 @@ export const useUserStore = create((set: any) => ({
       },
       body: JSON.stringify(user),
     })
-    const data: ErrorResponse | User = await response.json()
+    const data: ErrorResponse | DoneResponse = await response.json()
     if ("statusCode" in data) throw new Error(data.message)
 
-    set({ user: data })
+    set({ user: data.user, token: data.token })
   },
 
   signout: async () => {
