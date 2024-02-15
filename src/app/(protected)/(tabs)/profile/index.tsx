@@ -31,7 +31,11 @@ const Profile = () => {
     <View className="flex flex-col p-6" style={{ gap: 32 }}>
       <Title variant="transparent">Mi perfil</Title>
       <ProfileInformation user={user as User} />
-      <Button onPress={handleActiveModal} variant="lg">
+      <Button
+        onPress={handleActiveModal}
+        variant="lg"
+        backgroundColor="bg-primary-dark"
+      >
         Cerrar Sesión
       </Button>
       <Modal
@@ -49,7 +53,12 @@ const Profile = () => {
             ¿Estas seguro que deseas cerrar sesión?
           </Text>
           <View className="flex flex-row" style={{ gap: 12 }}>
-            <Button width="w-1/2" variant="lg" onPress={handleActiveModal}>
+            <Button
+              width="w-1/2"
+              variant="lg"
+              onPress={handleActiveModal}
+              backgroundColor="bg-transparent"
+            >
               Cancelar
             </Button>
             <Button

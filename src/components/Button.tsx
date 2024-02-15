@@ -23,14 +23,14 @@ const Button = ({
   width?: WidthType
   icon?: ReactNode
   variant?: "sm" | "lg" | "xl"
-  backgroundColor?: "bg-primary-dark" | "bg-primary-normal"
+  backgroundColor?: "bg-primary-dark" | "bg-primary-normal" | "bg-transparent"
   onPress: () => void
 }) => {
   return (
     <Pressable
       onPress={onPress}
       className={`flex flex-row items-center justify-center ${
-        backgroundColor
+        backgroundColor !== "bg-transparent"
           ? `${backgroundColor} text-white`
           : "border-2 border-primary-dark"
       } h-14 rounded-xl ${width}`}
@@ -43,7 +43,11 @@ const Button = ({
             : variant === "lg"
             ? "text-lg"
             : "text-3xl"
-        } ${backgroundColor ? "text-white" : "text-primary-dark"} font-bold`}
+        } ${
+          backgroundColor !== "bg-transparent"
+            ? "text-white"
+            : "text-primary-dark"
+        } font-bold`}
       >
         {children}
       </Text>

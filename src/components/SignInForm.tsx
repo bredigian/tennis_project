@@ -10,7 +10,7 @@ const AuthForm = () => {
   const {
     handleSubmit,
     control,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isValid },
   } = useForm<AuthFormT>()
 
   const { signin } = useUserStore()
@@ -41,6 +41,7 @@ const AuthForm = () => {
       <Button
         onPress={handleSubmit(onSubmit)}
         variant="lg"
+        backgroundColor={isValid ? "bg-primary-dark" : "bg-transparent"}
         icon={
           isSubmitting && <ActivityIndicator size={"large"} color={"white"} />
         }
