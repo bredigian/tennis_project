@@ -1,18 +1,10 @@
-import { ScrollView, Text } from "react-native"
+import { Text } from "react-native"
 
-const Subtitle = ({
-  children,
-  maxHeight,
-}: {
-  children: string
-  maxHeight?: number //Especial para detalles tipo parrafos
-}) => {
+const Subtitle = ({ children }: { children: string }) => {
   return (
-    <ScrollView style={{ maxHeight }}>
-      <Text className="text-sm text-primary-normal opacity-80 font-medium text-justify">
-        {children}
-      </Text>
-    </ScrollView>
+    <Text className="text-sm text-primary-normal opacity-80 font-medium text-justify">
+      {children}
+    </Text>
   )
 }
 

@@ -1,4 +1,4 @@
-import { Image, Text, View } from "react-native"
+import { Image, ScrollView, Text, View } from "react-native"
 import { useEffect, useState } from "react"
 
 import Button from "@/components/Button"
@@ -54,7 +54,11 @@ const ProductDetail = () => {
         </Title>
         <Title variant="dark">{`US$ ${detail?.price}`}</Title>
       </View>
-      <Subtitle maxHeight={200}>{detail?.description as string}</Subtitle>
+      <View style={{ maxHeight: 200 }}>
+        <ScrollView>
+          <Subtitle>{detail?.description as string}</Subtitle>
+        </ScrollView>
+      </View>
       <View className="flex flex-row items-center justify-between w-full">
         <Text className="text-sm font-semibold text-primary-dark">
           Stock disponible

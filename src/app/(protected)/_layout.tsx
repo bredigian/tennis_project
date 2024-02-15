@@ -9,6 +9,7 @@ const ProtectedLayout = () => {
           borderTopLeftRadius: 24,
           borderTopRightRadius: 24,
         },
+        animation: "ios",
       }}
     >
       <Stack.Screen name="(tabs)" />
