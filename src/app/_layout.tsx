@@ -1,10 +1,11 @@
 import { Slot, useRouter, useSegments } from "expo-router"
 
+import { Alert } from "react-native"
 import { useEffect } from "react"
 import { useUserStore } from "@/store/user.store"
 
 const Layout = () => {
-  const { user } = useUserStore()
+  const { user, verifyToken } = useUserStore()
   const segmentes = useSegments()
   const { replace } = useRouter()
 
@@ -17,6 +18,21 @@ const Layout = () => {
       replace("/(auth)")
     }
   }, [user])
+
+  const verify = async () => {
+    try {
+      await verifyToken()
+    } catch (error: any) {
+      Alert.alert(
+        "Ocurrió un error al verificar la sesión",
+        error.message as string
+      )
+    }
+  }
+
+  useEffect(() => {
+    verify()
+  }, [])
 
   return <Slot />
 }

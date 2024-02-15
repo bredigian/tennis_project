@@ -1,3 +1,5 @@
+import * as SecureStore from "expo-secure-store"
+
 import { API_URL } from "@/config/api"
 import { AuthForm } from "@/types/auth.types"
 import { ErrorResponse } from "@/types/response.types"
@@ -13,6 +15,25 @@ export const useUserStore = create((set: any) => ({
   user: null as User | null,
   token: null as string | null,
 
+  verifyToken: async () => {
+    const token = await SecureStore.getItemAsync("token")
+    if (token) {
+      const response = await fetch(`${API_URL}/auth/verify`, {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      const data: ErrorResponse | DoneResponse = await response.json()
+      if ("statusCode" in data) {
+        await SecureStore.deleteItemAsync("token")
+        throw new Error(data.message)
+      }
+
+      set({ user: data.user, token })
+    } else return
+  },
+
   signup: async (user: AuthForm) => {
     const response = await fetch(`${API_URL}/auth/signup`, {
       method: "POST",
@@ -23,6 +44,8 @@ export const useUserStore = create((set: any) => ({
     })
     const data: ErrorResponse | DoneResponse = await response.json()
     if ("statusCode" in data) throw new Error(data.message)
+
+    await SecureStore.setItemAsync("token", data.token)
 
     set({ user: data.user, token: data.token })
   },
@@ -37,6 +60,8 @@ export const useUserStore = create((set: any) => ({
     })
     const data: ErrorResponse | DoneResponse = await response.json()
     if ("statusCode" in data) throw new Error(data.message)
+
+    await SecureStore.setItemAsync("token", data.token)
 
     set({ user: data.user, token: data.token })
   },
