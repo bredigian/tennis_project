@@ -1,4 +1,11 @@
-import { Alert, Image, ScrollView, Text, View } from "react-native"
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  ScrollView,
+  Text,
+  View,
+} from "react-native"
 import { StripeProvider, useStripe } from "@stripe/stripe-react-native"
 import { useEffect, useState } from "react"
 
@@ -12,30 +19,30 @@ import Title from "@/components/Title"
 import { useLocalSearchParams } from "expo-router"
 import { useProductsStore } from "@/store/products.store"
 import { usePurchasesStore } from "@/store/purchases.store"
+import { useQuantity } from "@/hooks/useQuantity"
 
 const ProductDetail = () => {
   const { id } = useLocalSearchParams<{ id: string }>()
 
   const { detail, getProductById } = useProductsStore()
-  const { createIntent, getStripeKey } = usePurchasesStore()
+  const { createIntent, cancelIntent, getStripeKey } = usePurchasesStore()
 
-  const [quantity, setQuantity] = useState(0)
   const [publishableKey, setPublishableKey] = useState<string | null>(null)
 
   const { initPaymentSheet, presentPaymentSheet } = useStripe()
+  const { quantity, plus, minus } = useQuantity()
 
-  const plus = () => {
-    if (quantity) setQuantity(quantity + 1)
-  }
-  const minus = () => {
-    setQuantity(quantity - 1)
-  }
+  const [purchasing, setPurchasing] = useState(false)
 
   const handlePurchase = async () => {
+    setPurchasing(true)
     try {
-      const payment_intent = await createIntent(detail as Product, quantity)
+      const { id, client_secret } = await createIntent(
+        detail as Product,
+        quantity
+      )
       const { error } = await initPaymentSheet({
-        paymentIntentClientSecret: payment_intent,
+        paymentIntentClientSecret: client_secret,
         merchantDisplayName: "Tennis Shop",
       })
       if (error)
@@ -44,10 +51,14 @@ const ProductDetail = () => {
         )
 
       const paymentResult = await presentPaymentSheet()
-      if (paymentResult.error) throw new Error(paymentResult.error.message)
+      if (paymentResult.error) {
+        await cancelIntent(id)
+        throw new Error(paymentResult.error.message)
+      }
     } catch (error: any) {
       Alert.alert("Se ha producido un error", error.message as string)
     }
+    setPurchasing(false)
   }
 
   const fetchPublishableKey = async () => {
@@ -62,8 +73,9 @@ const ProductDetail = () => {
   useEffect(() => {
     fetchPublishableKey()
     getProductById(id as string)
-    if ((detail?.stock as number) > 0) setQuantity(1)
   }, [id])
+
+  const onlyOneUnitAvailable = quantity === detail?.stock
 
   return (
     <StripeProvider publishableKey={publishableKey as string}>
@@ -97,25 +109,33 @@ const ProductDetail = () => {
         </View>
         <View className="flex flex-row items-center justify-between w-full">
           <Text className="text-sm font-semibold text-primary-dark">
-            Stock disponible
+            {!onlyOneUnitAvailable
+              ? "Stock disponible"
+              : "¡Última unidad disponible!"}
           </Text>
-          <QuantitySelector
-            stock={detail?.stock as number}
-            quantity={quantity}
-            plus={plus}
-            minus={minus}
-          />
+          {!onlyOneUnitAvailable && (
+            <QuantitySelector
+              stock={detail?.stock as number}
+              quantity={quantity}
+              plus={plus}
+              minus={minus}
+            />
+          )}
         </View>
         <Button
           width="w-full"
           onPress={handlePurchase}
           backgroundColor="bg-primary-normal"
           icon={
-            <MaterialCommunityIcons
-              name="shopping-outline"
-              color={"white"}
-              size={30}
-            />
+            !purchasing ? (
+              <MaterialCommunityIcons
+                name="shopping-outline"
+                color={"white"}
+                size={30}
+              />
+            ) : (
+              <ActivityIndicator size={"large"} color={"white"} />
+            )
           }
         >
           Comprar

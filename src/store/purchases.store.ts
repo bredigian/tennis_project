@@ -26,10 +26,24 @@ export const usePurchasesStore = create((set: any) => ({
         quantity,
       }),
     })
-    const data: ErrorResponse | { client_secret: string } =
+    const data: ErrorResponse | { id: string; client_secret: string } =
       await response.json()
     if ("statusCode" in data) throw new Error(data.message)
 
-    return data.client_secret
+    return { id: data.id, client_secret: data.client_secret }
+  },
+
+  cancelIntent: async (id: string) => {
+    const response = await fetch(`${API_URL}/purchases/cancel`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    })
+    const data: ErrorResponse | { ok: boolean } = await response.json()
+    if ("statusCode" in data) throw new Error(data.message)
+
+    return data.ok
   },
 }))
