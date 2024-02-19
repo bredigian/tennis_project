@@ -1,9 +1,12 @@
 import { API_URL } from "@/config/api"
 import { ErrorResponse } from "@/types/response.types"
 import { Product } from "@/types/product.types"
+import { Purchase } from "@/types/purchases.types"
 import { create } from "zustand"
 
-export const usePurchasesStore = create((set: any) => ({
+export const usePurchasesStore = create(() => ({
+  purchases: [] as Purchase[],
+
   getStripeKey: async () => {
     const response = await fetch(`${API_URL}/purchases/authorization`, {
       method: "GET",
@@ -15,7 +18,7 @@ export const usePurchasesStore = create((set: any) => ({
   },
 
   createIntent: async (product: Product, quantity: number) => {
-    const response = await fetch(`${API_URL}/purchases`, {
+    const response = await fetch(`${API_URL}/purchases/intent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,6 +34,32 @@ export const usePurchasesStore = create((set: any) => ({
     if ("statusCode" in data) throw new Error(data.message)
 
     return { id: data.id, client_secret: data.client_secret }
+  },
+
+  createPurchase: async (
+    id: string,
+    product: Product,
+    quantity: number,
+    user_id: string
+  ) => {
+    const response = await fetch(`${API_URL}/purchases`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        product,
+        quantity,
+        user_id,
+      }),
+    })
+    const data: ErrorResponse | Purchase = await response.json()
+    if ("statusCode" in data) throw new Error(data.message)
+
+    usePurchasesStore.setState((state) => ({
+      purchases: [...state.purchases, data],
+    }))
   },
 
   cancelIntent: async (id: string) => {

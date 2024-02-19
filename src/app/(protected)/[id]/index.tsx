@@ -20,12 +20,16 @@ import { useLocalSearchParams } from "expo-router"
 import { useProductsStore } from "@/store/products.store"
 import { usePurchasesStore } from "@/store/purchases.store"
 import { useQuantity } from "@/hooks/useQuantity"
+import { useUserStore } from "@/store/user.store"
 
 const ProductDetail = () => {
   const { id } = useLocalSearchParams<{ id: string }>()
 
+  const { user } = useUserStore()
+
   const { detail, getProductById } = useProductsStore()
-  const { createIntent, cancelIntent, getStripeKey } = usePurchasesStore()
+  const { createIntent, cancelIntent, getStripeKey, createPurchase } =
+    usePurchasesStore()
 
   const [publishableKey, setPublishableKey] = useState<string | null>(null)
 
@@ -55,6 +59,9 @@ const ProductDetail = () => {
         await cancelIntent(id)
         throw new Error(paymentResult.error.message)
       }
+
+      await createPurchase(id, detail as Product, quantity, user?.id as string)
+      Alert.alert("¡Compra realizada con éxito!", "Gracias por tu compra.")
     } catch (error: any) {
       Alert.alert("Se ha producido un error", error.message as string)
     }
