@@ -31,6 +31,8 @@ const ProductDetail = () => {
   const { createIntent, cancelIntent, getStripeKey, createPurchase } =
     usePurchasesStore()
 
+  const { verifyStockById, updateById } = useProductsStore()
+
   const [publishableKey, setPublishableKey] = useState<string | null>(null)
 
   const { initPaymentSheet, presentPaymentSheet } = useStripe()
@@ -41,6 +43,8 @@ const ProductDetail = () => {
   const handlePurchase = async () => {
     setPurchasing(true)
     try {
+      await verifyStockById(detail?.id as string, quantity)
+      await updateById(detail?.id as string, quantity, true)
       const { id, client_secret } = await createIntent(
         detail as Product,
         quantity
@@ -57,6 +61,7 @@ const ProductDetail = () => {
       const paymentResult = await presentPaymentSheet()
       if (paymentResult.error) {
         await cancelIntent(id)
+        await updateById(detail?.id as string, quantity, false)
         throw new Error(paymentResult.error.message)
       }
 
